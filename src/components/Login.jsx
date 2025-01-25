@@ -47,6 +47,7 @@ const Login = () => {
   };
 
   return (
+    <div>
     <div className="flex justify-center my-10">
       <div className="card bg-base-300 w-96 shadow-xl">
         <div className="card-body">
@@ -123,6 +124,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 };
