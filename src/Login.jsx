@@ -1,9 +1,19 @@
 import React, { useState } from 'react'
+import axios from "axios";
 
 const Login = () => {
 
-  const[emailId, setEmailId]= useState("");
-  const[password,setPassword]= useState("");
+  const[emailId, setEmailId]= useState("Elon@gmail.com");
+  const[password,setPassword]= useState("Elon@50");
+
+  const handleLogin = async() =>{
+    try {
+      const resut= axios.post("http://localhost:7777/login", {emailId,password,},{withCredentials:true});
+    }catch(err){
+      res.status(400).send("ERROR in Logic "+err.message)
+    }
+    
+  }
 
 
   return (
@@ -12,43 +22,21 @@ const Login = () => {
         <div className="card-body">
           <h2 className="card-title justify-center">Login</h2>
           <div>
+
             <label className="form-control w-full max-w-xs my-2">
-              <div className="label">
-                <span className="label-text">Email ID: </span>
-              </div>
-              {/* 
-              value={emailId}
-              onChange={(e) => setEmailId(e.target.value)}
-              // ❌ emailId and setEmailId are not defined
-              */}
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs"
-                value={emailId}
-                onChange={(e) => setEmailId(e.target.value)}
-              />
+              <div className="label"><span className="label-text">Email ID: </span></div>
+              <input type="text" className="input input-bordered w-full max-w-xs" value={emailId} onChange={(e) => setEmailId(e.target.value)} />
             </label>
+
             <label className="form-control w-full max-w-xs my-2">
-              <div className="label">
-                <span className="label-text">Password</span>
-              </div>
-              {/* 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              // ❌ password and setPassword are not defined
-              */}
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="label"><span className="label-text">Password</span></div>
+              <input type="text" className="input input-bordered w-full max-w-xs" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
+
           </div>
+          
           <div className="card-actions justify-center m-2">
-            {/* onClick={handleLogin} */}
-            {/* ❌ handleLogin function is not defined */}
-            <button className="btn btn-primary">
+            <button className="btn btn-primary" onClick={handleLogin}>
               Login
             </button>
           </div>
