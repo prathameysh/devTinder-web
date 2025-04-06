@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Login = () => {
+
+  const[emailId, setEmailId]= useState("");
+  const[password,setPassword]= useState("");
+
+
   return (
     <div className="flex justify-center my-10">
       <div className="card bg-base-300 w-96 shadow-xl">
@@ -9,7 +14,7 @@ const Login = () => {
           <div>
             <label className="form-control w-full max-w-xs my-2">
               <div className="label">
-                <span className="label-text">Email ID:</span>
+                <span className="label-text">Email ID: </span>
               </div>
               {/* 
               value={emailId}
@@ -19,8 +24,8 @@ const Login = () => {
               <input
                 type="text"
                 className="input input-bordered w-full max-w-xs"
-                // value={emailId}
-                // onChange={(e) => setEmailId(e.target.value)}
+                value={emailId}
+                onChange={(e) => setEmailId(e.target.value)}
               />
             </label>
             <label className="form-control w-full max-w-xs my-2">
@@ -35,8 +40,8 @@ const Login = () => {
               <input
                 type="text"
                 className="input input-bordered w-full max-w-xs"
-                // value={password}
-                // onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
           </div>
