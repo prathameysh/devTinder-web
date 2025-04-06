@@ -1,9 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
 
 
-  
+  const user= useSelector((store)=>store.user);
 
 
 
@@ -16,7 +17,7 @@ const Navbar = () => {
         <a className="btn btn-ghost text-xl flex items-center gap-2"><img className="h-6 w-6" src="vite.svg" alt="logo" />devTinder</a>
       </div>
   
-      <div className="flex gap-2">
+      {user &&(<div className="flex gap-2">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <img className="w-10 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
@@ -27,7 +28,7 @@ const Navbar = () => {
             <li><a>Logout</a></li>
           </ul>
         </div>
-      </div>
+      </div>)}
 
     </div>
     </>

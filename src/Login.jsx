@@ -1,14 +1,22 @@
 import React, { useState } from 'react'
 import axios from "axios";
+import { useDispatch } from 'react-redux';
+import { addUser } from './utils/userSlice';
+import { useNavigate } from 'react-router';
 
 const Login = () => {
 
   const[emailId, setEmailId]= useState("Elon@gmail.com");
   const[password,setPassword]= useState("Elon@50");
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleLogin = async() =>{
     try {
-      const resut= axios.post("http://localhost:7777/login", {emailId,password,},{withCredentials:true});
+      const res=await axios.post("http://localhost:7777/login", {emailId,password,},{withCredentials:true});
+      dispatch(addUser(res.data));
+      return navigate("/");
     }catch(err){
       res.status(400).send("ERROR in Logic "+err.message)
     }
