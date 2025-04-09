@@ -1,29 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import axios from "axios";
-import { useDispatch } from 'react-redux';
-import { addUser } from '../utils/userSlice';
-import { useNavigate } from 'react-router';
-import { BASE_URL } from '../utils/constants';
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router";
+import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
-
-  const[emailId, setEmailId]= useState("Elon@gmail.com");
-  const[password,setPassword]= useState("Elon@50");
+  const [emailId, setEmailId] = useState("Spider@gmail.com");
+  const [password, setPassword] = useState("Spider@25");
+  const [error, setError] = useState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = async() =>{
+  const handleLogin = async () => {
     try {
-      const res=await axios.post(BASE_URL+ "/login", {emailId,password,},{withCredentials:true});
-      dispatch(addUser(res.data));
+      const res = await axios.post(
+        BASE_URL + "/login",
+        { emailId, password },
+        { withCredentials: true }
+      );
+      dispatch(addUser(res.data.user));
       return navigate("/");
-    }catch(err){
-      res.status(400).send("ERROR in Logic "+err.message)
+    } catch (err) {
+      setError(err?.response?.data || "Something went wrong");
     }
-    
-  }
-
+  };
 
   return (
     <div className="flex justify-center my-10">
@@ -31,19 +33,31 @@ const Login = () => {
         <div className="card-body">
           <h2 className="card-title justify-center">Login</h2>
           <div>
-
             <label className="form-control w-full max-w-xs my-2">
-              <div className="label"><span className="label-text">Email ID: </span></div>
-              <input type="text" className="input input-bordered w-full max-w-xs" value={emailId} onChange={(e) => setEmailId(e.target.value)} />
+              <div className="label">
+                <span className="label-text">Email ID: </span>
+              </div>
+              <input
+                type="text"
+                className="input input-bordered w-full max-w-xs"
+                value={emailId}
+                onChange={(e) => setEmailId(e.target.value)}
+              />
             </label>
 
             <label className="form-control w-full max-w-xs my-2">
-              <div className="label"><span className="label-text">Password</span></div>
-              <input type="text" className="input input-bordered w-full max-w-xs" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <div className="label">
+                <span className="label-text">Password</span>
+              </div>
+              <input
+                type="text"
+                className="input input-bordered w-full max-w-xs"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </label>
-
           </div>
-          
+          <p className="text-red-500 flex justify-center my-2">{error}</p>
           <div className="card-actions justify-center m-2">
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
@@ -52,7 +66,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
