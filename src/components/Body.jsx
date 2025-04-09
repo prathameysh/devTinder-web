@@ -11,6 +11,7 @@ const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((store) => store.user);
+  console.log("data from Bodyjsx :"+userData );
 
 
   const fetchUser = async () =>{
@@ -21,6 +22,7 @@ const Body = () => {
         withCredentials:true,
       });
       dispatch(addUser(res.data));
+      console.log("Fetched user:", res.data);
     }catch(err){
       if (err.status === 401) {
         navigate("/login"); 

@@ -1,8 +1,7 @@
 import React from "react";
 
 const Card = ({ user }) => {
-  const { firstName, lastName, emailId, age, gender, imageUrl, password } =
-    user;
+  const { firstName, lastName, emailId, age, gender, imageUrl, password } =user;
 
   return (
     <div className="my-10 mx-142  ">

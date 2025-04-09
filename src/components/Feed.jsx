@@ -12,14 +12,15 @@ const Feed = () => {
   const feed = useSelector((store) => store.feed); // Get feed from Redux
 
   const getFeed = async () => {
-    if (feed) return;
+    if (feed && feed.length > 0) return;
 
     try {
       const res = await axios.get(BASE_URL + "/user/feed", {
         withCredentials: true,
       });
-      dispatch(addFeed(res.data.users));
-      console.log(res.data.users);
+      console.log("API response:", res.data);
+      console.log("Full feed data:", res?.data?.users);
+      dispatch(addFeed(res?.data?.users));
     } catch (err) {
       //TODO: handle error
     }
@@ -29,11 +30,16 @@ const Feed = () => {
     getFeed();
   }, []);
 
+  console.log("Feed[0]:", feed[0]);
+  console.log("Full feed in Redux:", feed);
+
   return (
-    <>
+  feed && feed[0] && (
+    <div className="flex justify-center my-10">
       <Card user={feed[0]} />
-    </>
-  );
+    </div>
+  )
+);
 };
 
 export default Feed;
