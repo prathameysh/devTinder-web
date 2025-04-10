@@ -30,8 +30,8 @@ const Feed = () => {
     getFeed();
   }, []);
 
-  console.log("Feed[0]:", feed[0]);
-  console.log("Full feed in Redux:", feed);
+  if (!feed) return;
+  if (feed.length <= 0) return <h1 className="flex justify-center my-10">No new users founds!</h1>;
 
   return (
   feed && feed[0] && (
