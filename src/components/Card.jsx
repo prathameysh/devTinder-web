@@ -4,7 +4,7 @@ const Card = ({ user }) => {
   const { firstName, lastName, emailId, age, gender, imageUrl, password } =user;
 
   return (
-    <div className="my-10 mx-142  ">
+    <div className="">
       <div className="card bg-base-100 w-96 shadow-sm">
         <figure>
           <img src={imageUrl} />
